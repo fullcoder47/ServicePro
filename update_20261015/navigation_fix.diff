@@ -1,0 +1,364 @@
+--- before/lib/app.dart
++++ after/lib/app.dart
+@@ -4,13 +4,20 @@
+ 
+ import 'core/theme/app_theme.dart';
+ import 'data/app_state.dart';
++import 'data/models.dart';
+ import 'features/onboarding/guest_shell.dart';
+ import 'features/auth/splash_page.dart';
+ import 'features/offline/offline_page.dart';
+ import 'features/shell/home_shell.dart';
+ 
+ class ServiceProApp extends StatefulWidget {
+-  const ServiceProApp({super.key});
++  const ServiceProApp({super.key}) : _providedAppState = null;
++
++  /// Allows widget tests to use inert state without starting backend services.
++  const ServiceProApp.forTesting({super.key, required AppState appState})
++      : _providedAppState = appState;
++
++  final AppState? _providedAppState;
+ 
+   @override
+   State<ServiceProApp> createState() => _ServiceProAppState();
+@@ -18,16 +25,23 @@
+ 
+ class _ServiceProAppState extends State<ServiceProApp> {
+   late final AppState appState;
++  // One navigator for this app instance, independent of theme and account.
++  final _navigatorKey = GlobalKey<NavigatorState>(
++    debugLabel: 'servicepro-root-navigator',
++  );
++  UserRole? _themeRole;
++  ThemeData? _lightTheme;
++  ThemeData? _darkTheme;
+ 
+   @override
+   void initState() {
+     super.initState();
+-    appState = AppState();
++    appState = widget._providedAppState ?? AppState();
+   }
+ 
+   @override
+   void dispose() {
+-    appState.dispose();
++    if (widget._providedAppState == null) appState.dispose();
+     super.dispose();
+   }
+ 
+@@ -36,24 +50,38 @@
+     return AnimatedBuilder(
+       animation: appState,
+       builder: (context, _) {
++        final role = appState.currentProfile?.role;
++        // Chat/read updates also notify this builder. Reuse both palettes until
++        // the role changes instead of generating ColorSchemes on every event.
++        if (_lightTheme == null || _themeRole != role) {
++          _themeRole = role;
++          _lightTheme = AppTheme.forRole(role, Brightness.light);
++          _darkTheme = AppTheme.forRole(role, Brightness.dark);
++        }
+         return AppLanguageScope(
+           language: appState.currentProfile?.language ?? appState.authLanguage,
+           child: MaterialApp(
+-          debugShowCheckedModeBanner: false,
+-          title: 'ServicePro',
+-          theme: AppTheme.forRole(appState.currentProfile?.role, Brightness.light),
+-          darkTheme: AppTheme.forRole(appState.currentProfile?.role, Brightness.dark),
+-          themeMode: appState.themeMode,
+-          home: !appState.isConfigured
+-              ? const _SupabaseSetupPage()
+-              : (!appState.isOnline && appState.networkChecked)
+-                  ? OfflinePage(appState: appState)
+-                  : !appState.appReady
+-                      ? const SplashPage()
+-                      : appState.currentProfile == null
+-                          ? GuestShell(appState: appState)
+-                          : NotificationRouter(key: ValueKey(appState.currentProfile!.id), appState: appState, child: HomeShell(appState: appState)),
+-        ));
++            navigatorKey: _navigatorKey,
++            debugShowCheckedModeBanner: false,
++            title: 'ServicePro',
++            theme: _lightTheme,
++            darkTheme: _darkTheme,
++            themeMode: appState.themeMode,
++            home: !appState.isConfigured
++                ? const _SupabaseSetupPage()
++                : (!appState.isOnline && appState.networkChecked)
++                    ? OfflinePage(appState: appState)
++                    : !appState.appReady
++                        ? const SplashPage()
++                        : appState.currentProfile == null
++                            ? GuestShell(appState: appState)
++                            : NotificationRouter(
++                                key: ValueKey((appState.currentProfile!.id, role)),
++                                appState: appState,
++                                child: HomeShell(appState: appState),
++                              ),
++          ),
++        );
+       },
+     );
+   }
+--- before/lib/core/widgets/app_route.dart
++++ after/lib/core/widgets/app_route.dart
+@@ -5,24 +5,12 @@
+     transitionDuration: const Duration(milliseconds: 320),
+     reverseTransitionDuration: const Duration(milliseconds: 260),
+     pageBuilder: (context, animation, secondaryAnimation) => page,
+-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+-      final curved = CurvedAnimation(
+-        parent: animation,
+-        curve: Curves.easeOutCubic,
+-        reverseCurve: Curves.easeInCubic,
+-      );
+-
+-      return FadeTransition(
+-        opacity: curved,
+-        child: SlideTransition(
+-          position: Tween<Offset>(
+-            begin: const Offset(.06, 0),
+-            end: Offset.zero,
+-          ).animate(curved),
+-          child: child,
+-        ),
+-      );
+-    },
++    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
++        _SmoothTransition(
++      animation: animation,
++      begin: const Offset(.06, 0),
++      child: child,
++    ),
+   );
+ }
+ 
+@@ -37,21 +25,73 @@
+     Animation<double> secondaryAnimation,
+     Widget child,
+   ) {
+-    final curved = CurvedAnimation(
+-      parent: animation,
++    return _SmoothTransition(
++      animation: animation,
++      begin: const Offset(.045, 0),
++      child: child,
++    );
++  }
++}
++
++class _SmoothTransition extends StatefulWidget {
++  const _SmoothTransition({
++    required this.animation,
++    required this.begin,
++    required this.child,
++  });
++
++  final Animation<double> animation;
++  final Offset begin;
++  final Widget child;
++
++  @override
++  State<_SmoothTransition> createState() => _SmoothTransitionState();
++}
++
++class _SmoothTransitionState extends State<_SmoothTransition> {
++  late CurvedAnimation _curve;
++  late Animation<Offset> _position;
++
++  @override
++  void initState() {
++    super.initState();
++    _createCurve();
++  }
++
++  void _createCurve() {
++    _curve = CurvedAnimation(
++      parent: widget.animation,
+       curve: Curves.easeOutCubic,
+       reverseCurve: Curves.easeInCubic,
+     );
++    _updatePosition();
++  }
+ 
+-    return FadeTransition(
+-      opacity: curved,
+-      child: SlideTransition(
+-        position: Tween<Offset>(
+-          begin: const Offset(.045, 0),
+-          end: Offset.zero,
+-        ).animate(curved),
+-        child: child,
+-      ),
+-    );
++  void _updatePosition() {
++    _position = Tween<Offset>(begin: widget.begin, end: Offset.zero)
++        .animate(_curve);
+   }
++
++  @override
++  void didUpdateWidget(covariant _SmoothTransition oldWidget) {
++    super.didUpdateWidget(oldWidget);
++    if (!identical(oldWidget.animation, widget.animation)) {
++      _curve.dispose();
++      _createCurve();
++    } else if (oldWidget.begin != widget.begin) {
++      _updatePosition();
++    }
++  }
++
++  @override
++  void dispose() {
++    _curve.dispose();
++    super.dispose();
++  }
++
++  @override
++  Widget build(BuildContext context) => FadeTransition(
++    opacity: _curve,
++    child: SlideTransition(position: _position, child: widget.child),
++  );
+ }
+--- before/lib/features/super_admin/super_admin_page.dart
++++ after/lib/features/super_admin/super_admin_page.dart
+@@ -57,50 +57,106 @@
+   }
+ 
+   Future<void> _showCreateCompany(BuildContext context) async {
+-    final name = TextEditingController();
+-    final code = TextEditingController();
+-    final ok = await showDialog<bool>(
+-      context: context,
+-      builder: (context) => AlertDialog(
+-        title: const LocalizedText('Yangi tashkilot yaratish'),
+-        content: Column(
++    final draft = await showDialog<({String name, String joinPassword})>(
++      context: context,
++      builder: (_) => _CreateCompanyDialog(appState: appState),
++    );
++    if (draft == null || !context.mounted) return;
++    final success = await appState.createCompanyBySuperAdmin(
++      name: draft.name,
++      joinPassword: draft.joinPassword,
++    );
++    if (context.mounted) {
++      ScaffoldMessenger.of(context).showSnackBar(
++        SnackBar(content: Text(success ? 'Tashkilot yaratildi.' : (appState.errorMessage ?? 'Tashkilot yaratilmadi.'))),
++      );
++    }
++  }
++}
++
++class _CreateCompanyDialog extends StatefulWidget {
++  const _CreateCompanyDialog({required this.appState});
++
++  final AppState appState;
++
++  @override
++  State<_CreateCompanyDialog> createState() => _CreateCompanyDialogState();
++}
++
++class _CreateCompanyDialogState extends State<_CreateCompanyDialog> {
++  final _form = GlobalKey<FormState>();
++  final _name = TextEditingController();
++  final _code = TextEditingController();
++  bool _closing = false;
++
++  // A popped dialog stays mounted until its reverse transition finishes.
++  // Its State owns these controllers for that entire lifetime.
++  @override
++  void dispose() {
++    _name.dispose();
++    _code.dispose();
++    super.dispose();
++  }
++
++  void _save() {
++    if (_closing || ModalRoute.of(context)?.isCurrent != true) return;
++    if (_form.currentState?.validate() != true) return;
++    _closing = true;
++    Navigator.of(context).pop((
++      name: _name.text.trim(),
++      joinPassword: _code.text.trim(),
++    ));
++  }
++
++  String? _required(String? value) => value == null || value.trim().isEmpty
++      ? widget.appState.tr('fill_required')
++      : null;
++
++  @override
++  Widget build(BuildContext context) => AlertDialog(
++    title: const LocalizedText('Yangi tashkilot yaratish'),
++    content: SingleChildScrollView(
++      child: Form(
++        key: _form,
++        child: Column(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+-            TextField(
+-              controller: name,
++            TextFormField(
++              controller: _name,
+               textInputAction: TextInputAction.next,
+-              decoration:  InputDecoration(
++              validator: _required,
++              decoration: InputDecoration(
+                 labelText: LocalizedText.translate(context, 'Tashkilot nomi'),
+-                prefixIcon: Icon(Icons.apartment_rounded),
++                prefixIcon: const Icon(Icons.apartment_rounded),
+               ),
+             ),
+             const SizedBox(height: 10),
+-            TextField(
+-              controller: code,
+-              decoration:  InputDecoration(
++            TextFormField(
++              controller: _code,
++              textInputAction: TextInputAction.done,
++              onFieldSubmitted: (_) => _save(),
++              validator: _required,
++              decoration: InputDecoration(
+                 labelText: LocalizedText.translate(context, 'Kirish kodi'),
+-                prefixIcon: Icon(Icons.key_rounded),
++                prefixIcon: const Icon(Icons.key_rounded),
+               ),
+             ),
+           ],
+         ),
+-        actions: [
+-          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(appState.tr('cancel'))),
+-          FilledButton(onPressed: () => Navigator.pop(context, true), child: const LocalizedText('Yaratish')),
+-        ],
+-      ),
+-    );
+-    if (ok == true) {
+-      final success = await appState.createCompanyBySuperAdmin(name: name.text, joinPassword: code.text);
+-      if (context.mounted) {
+-        ScaffoldMessenger.of(context).showSnackBar(
+-          SnackBar(content: Text(success ? 'Tashkilot yaratildi.' : (appState.errorMessage ?? 'Tashkilot yaratilmadi.'))),
+-        );
+-      }
+-    }
+-    name.dispose();
+-    code.dispose();
+-  }
++      ),
++    ),
++    actions: [
++      TextButton(
++        onPressed: () {
++          if (_closing || ModalRoute.of(context)?.isCurrent != true) return;
++          _closing = true;
++          Navigator.of(context).pop();
++        },
++        child: Text(widget.appState.tr('cancel')),
++      ),
++      FilledButton(onPressed: _save, child: const LocalizedText('Yaratish')),
++    ],
++  );
+ }
+ 
+ class _SuperHero extends StatelessWidget {

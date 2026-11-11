@@ -1,0 +1,27 @@
+PASS guest directory exposes no passwords
+PASS resident onboarding and stored address
+PASS self role escalation rejected
+PASS self company reassignment rejected
+PASS resident cannot create company
+PASS resident cannot issue staff invite
+PASS super admin issues scoped invite
+PASS wrong role does not redeem code
+PASS worker invitation grants only worker role
+PASS invitation cannot be reused
+PASS residents cannot read salary directly or via directory
+PASS worker claims new ticket atomically
+PASS completion requires media
+PASS assigned worker completes with evidence
+PASS resident rates own completed ticket only
+PASS resident cannot modify ticket creator
+PASS resident can close completed ticket
+PASS guest cannot read private resident data
+PASS other company cannot read tickets or resident addresses
+PASS other company cannot claim a ticket by guessing its ID
+PASS worker cannot edit own salary
+PASS shared code validates only the selected active organization
+PASS shared code enrolls director
+PASS shared code enrolls admin
+PASS shared code enrolls worker
+PASS shared code cannot promote an existing worker
+PASS shared code never grants super admin

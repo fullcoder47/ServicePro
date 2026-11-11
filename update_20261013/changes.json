@@ -1,0 +1,152 @@
+[
+  {
+    "path": "lib/data/models.dart",
+    "original": "b696ebf4bb90df1960babab3538183125ff70dbd8d29e83e995bb7e77fba533b",
+    "updated": "90a02044053061f7d4c3b81c21746b38558edf880450fbdb12933840c4d6251b"
+  },
+  {
+    "path": "lib/data/app_state.dart",
+    "original": "01ee66c32607325373a0e97fec6fb35f32a78292451d5e6790c4d4ef3a6fa62d",
+    "updated": "05501f64bd6b3c5a1e9a8197d95168880812e24a710cd1a0d7de9371488490a7"
+  },
+  {
+    "path": "lib/data/onboarding_state.dart",
+    "original": "e403f9372a913ddeea4405169f1ed11aa1e87ed32ca2e615734c0525f81b9aa3",
+    "updated": "a3c3f32d8627b772e521e0e471dc319dc1df19aa6ce3569272689bacedfe823a"
+  },
+  {
+    "path": "lib/data/workforce_state.dart",
+    "original": null,
+    "updated": "52b13a49fd088ac389cd85654314495bde604b2c1f4285f6fd18fa1b32450953"
+  },
+  {
+    "path": "lib/features/super_admin/company_cleanup.dart",
+    "original": null,
+    "updated": "307626f7fc324162bc748b1c7f61e008b23c6a132f6e9473040958022c591e0f"
+  },
+  {
+    "path": "lib/features/super_admin/super_admin_page.dart",
+    "original": "cd7a71fd40e0c7837e934188280c9c39b1a87c57864497d31ff7adf45404194f",
+    "updated": "f46643fc8f16ad93d7e212e77d6f9cea5916814b097c350df9668b822675ed81"
+  },
+  {
+    "path": "lib/features/workflow/workflow_text.dart",
+    "original": null,
+    "updated": "325de199887480ca3eee175afe3ea9a7872976dbc4760cb3239792caaf6a0927"
+  },
+  {
+    "path": "lib/features/chat/chat_page.dart",
+    "original": "802c3246d78ae4ac929df5bc32f573dc61b572831a76c716cadb6475518ebe0c",
+    "updated": "768284ca34f4dfb97427a75b2494b54072be0a6da9bfa525dd60d203b516a2c1"
+  },
+  {
+    "path": "lib/features/shell/home_shell.dart",
+    "original": "9d8da5eb8bb3189521ffef4ed930793c98d4007439cb27b549c81e13b9165771",
+    "updated": "6611906d6e0a85f06bd156256b9390cc5a4e211daf87f47928626954271763fa"
+  },
+  {
+    "path": "lib/features/team/team_section.dart",
+    "original": "fa9ca986eea7cbc01ba72e5634353eda9896fdc72a83aa46aac71edc9d8d859d",
+    "updated": "bd41d16227cd618f3bcd9c301ba20c62a6d4948cfee6b36c9a34957be6dc706f"
+  },
+  {
+    "path": "lib/features/team/team_page.dart",
+    "original": null,
+    "updated": "e47950ba8adf3ba3d625918dff0f5516db46aab5f1d1fff73001fc20030101a6"
+  },
+  {
+    "path": "lib/features/tickets/tickets_page.dart",
+    "original": "caa1f5260ad88011afb81bde3ad8740d2d1c3fb5057c149c8aca5273aec2c374",
+    "updated": "63b3bee4711c39a07743b1c23fca84480ddaee7e0c44acf6631d9f35c2933c40"
+  },
+  {
+    "path": "lib/features/tickets/worker_actions.dart",
+    "original": null,
+    "updated": "0059b42cd0645eb8916455d935e6859c5858a3d7d1490b1c3a55bedfd3e6678d"
+  },
+  {
+    "path": "lib/features/tickets/ticket_create_page.dart",
+    "original": "21d14860335493f38d8d31795a3eea4ebf7eea874d2543c777ade0cba9aa6822",
+    "updated": "464f0e4d8c8eec8f2ad99f39e7935550a6cd906d78acb1379682b673f4caf5fa"
+  },
+  {
+    "path": "lib/core/notifications/notification_router.dart",
+    "original": "282d91233ef3097b1745d121c7ea62a4cf9627ae88dc4a284b501ed8e41e1e06",
+    "updated": "f29babf95dec0c9ee652ed0924c96b9faf7cc6f3045812c5873a5cf616472602"
+  },
+  {
+    "path": "lib/core/notifications/notification_service.dart",
+    "original": "fb24aa44a7ed430032fcf870fb26bcdfd14231d5393a71bf0133eaf5f9a2832e",
+    "updated": "84955e8f66baf9d027cebd3dad6784982328958695159d8edcad19769782521a"
+  },
+  {
+    "path": "lib/core/notifications/notification_inbox.dart",
+    "original": null,
+    "updated": "f8766464a22a9cab41bfc42c9fdc5875bc35948ccae6657c137598497af3342b"
+  },
+  {
+    "path": "test/workflow/team_and_inbox_test.dart",
+    "original": null,
+    "updated": "ad6bf54d137ae1caf1690b1d985f23d4457b56e39749be1ca03928326cd25c1e"
+  },
+  {
+    "path": "supabase/migrations/20261013115038_workforce_notifications.sql",
+    "original": null,
+    "updated": "fe2b5fd0786f62e447bb3b812de6d6b1770a150ebbc80af4ad9be7dd739ad6b8"
+  },
+  {
+    "path": "supabase/functions/notification-worker/index.ts",
+    "original": "e7f602ac760e8a7934598b7aa98dfcbc4bea1d76ece8cd82164b48a41c16ad99",
+    "updated": "fcd5344f6ed58f9f66a55489159a82446d4668cc4c5519f79f8f89755ea77681"
+  },
+  {
+    "path": "update_20261013/README_UZ.md",
+    "original": null,
+    "updated": "ccd4118aa0ea3afa0ca0ab2c2bc8c40eda91c8f59fe611f170886a02b2b85522"
+  },
+  {
+    "path": "update_20261013/notification_schedule.sql",
+    "original": null,
+    "updated": "eb7a80622ecc68bdedb658d55f9d15c59fec8e8f85e77f3700955e9cd90ff927"
+  },
+  {
+    "path": "update_20261013/VALIDATION.md",
+    "original": null,
+    "updated": "970ebc9e331f973001dbcb9316aaed42672eb9defac47546667f22337e5e4456"
+  },
+  {
+    "path": "update_20261013/verification/test_backend.mjs",
+    "original": null,
+    "updated": "8acbfb96f60f0b1fa58b1e0e9faa04a11fb1ad54a28b39f92a95f622b0061dab"
+  },
+  {
+    "path": "update_20261013/verification/backend-results.txt",
+    "original": null,
+    "updated": "9d6f5da47648f7d40fa5c220f9dcdf459afb0c2ccb7aef6392e17fc44cc48b07"
+  },
+  {
+    "path": "update_20261013/verification/package.json",
+    "original": null,
+    "updated": "c1dc414bf4399a09ab96e66f20bb3c2e2896e334ad6e7a4d4155d2de3cd5fb16"
+  },
+  {
+    "path": "android/app/src/main/AndroidManifest.xml",
+    "original": "1cd962a4a8f98353b02ed7eb9a4153c75f6dcf49a03d0f97b3b311c4ee2391c1",
+    "updated": "af8bb6e30a1081db96f65603161a0983eff96c247871b002b829396f7ac7a03f"
+  },
+  {
+    "path": "android/app/src/main/res/raw/keep.xml",
+    "original": null,
+    "updated": "899cb9580daaa90dcb9f8856e92aff183088f1d486d6ecb13c8eff2e3a38799d"
+  },
+  {
+    "path": "android/app/src/main/res/drawable/ic_notification.xml",
+    "original": null,
+    "updated": "d9489b9da667ad20c2409e4d2186749f9b9c6f958727a4de52db4e03ea05da98"
+  },
+  {
+    "path": "ios/Runner/Info.plist",
+    "original": "563e2e6c706ef21c3f5adf4b29712e26c1137ca119f8d47586917a2a16b40bf0",
+    "updated": "c1898082b255c0837ebc306828876439186f3c6dbcc908a628d9fae23202c3ed"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "path": "lib/data/app_state.dart",
+    "original_sha256": "fbc6713a7c17e5966dd4e827279929e4160e41a2d5c49522f4dca3e2417b61ff",
+    "updated_sha256": "885185e72b7e269c44ad6c28d32f5ccdd4efa6fd66e50e326166e0c922ff4c7b"
+  },
+  {
+    "path": "lib/features/onboarding/access_page.dart",
+    "original_sha256": "f987bbcf603cfce659144b3b76e0342b959faaaa09c228bf10a2535a6f1edeff",
+    "updated_sha256": "b5b0c0c5a084de28699e8237984af637b48071d026ccade53d8eaaf0a291c40a"
+  },
+  {
+    "path": "lib/features/tickets/ticket_profile_editor.dart",
+    "original_sha256": "33ee85faf94ef085953fa8e2d490740c23ccb4df26943eccb73e2f696777ca62",
+    "updated_sha256": "a0558f8c3111f04bf98b33dcf77ecd1993d88daedee8d607160f8099f75d575b"
+  }
+]

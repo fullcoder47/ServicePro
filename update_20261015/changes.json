@@ -1,0 +1,28 @@
+{
+  "base": "ServicePro_notifications_workforce.zip, Library version 1",
+  "base_sha256": "f1c4bd8220a44ac3b287d9d3e6cff61d3a40b6875c51d1db2571be95b5259b4a",
+  "changed_application_files": [
+    {
+      "path": "lib/app.dart",
+      "before_sha256": "fed1c10ec52739a8efc7ea62698a2db2dad5487e79882fdea22ece898e9b92b5",
+      "after_sha256": "f0b8c8967b4e1155bba3d6db4f71c9c713012766d9fa14f7ac6a3fbe438aa4e5"
+    },
+    {
+      "path": "lib/core/widgets/app_route.dart",
+      "before_sha256": "ad74f933f0f72f6ff674a568300d2efd802ceeace3eac8074969716c96010800",
+      "after_sha256": "6fb48b353debca8c2436163f70035f5c660ac990190bd07da2c0109e088ee887"
+    },
+    {
+      "path": "lib/features/super_admin/super_admin_page.dart",
+      "before_sha256": "f46643fc8f16ad93d7e212e77d6f9cea5916814b097c350df9668b822675ed81",
+      "after_sha256": "1aeec2dab9d05d38b819ef2dc91116575a89f0949efdb5019d500678ff737678"
+    }
+  ],
+  "new_test_file": "test/regression/navigator_dialog_lifecycle_test.dart",
+  "dart_grammar_files": 49,
+  "grammar_and_import_issues": [],
+  "widget_tests_prepared": 5,
+  "widget_tests_executed": false,
+  "flutter_analyze_executed": false,
+  "device_test_executed": false
+}

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111F">
+  <meta name="description" content="ServicePro'ni iPhone, iPad, Mac, Android va Windows'da o'rnating.">
+  <link rel="icon" href="icons/Icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/Apple-Touch-180.png">
+  <title>ServicePro — o‘rnatish</title>
+  <style>
+    :root{color-scheme:dark;--night:#07111f;--card:#101e30;--gold:#d6a84f;--soft:#d9e0e8}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 80% -10%,#233e58 0,transparent 50%),var(--night);color:#fff;font:16px/1.55 system-ui,-apple-system,'Segoe UI',sans-serif}
+    .wrap{max-width:1050px;margin:auto;padding:30px 22px 70px}.logo{display:flex;align-items:center;gap:13px;color:#fff;font-weight:800;letter-spacing:.3px;font-size:20px;text-decoration:none}
+    .logo img{width:48px;height:48px;border-radius:13px;box-shadow:0 8px 22px #0005}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:32px;margin:60px 0 45px}
+    .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+    h1{font-size:clamp(35px,6vw,67px);line-height:1.1;letter-spacing:-1.9px;margin:15px 0 20px}
+    h1 em{font-style:normal;color:var(--gold)}.intro{max-width:510px;font-size:18px;color:var(--soft)}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.btn{border:0;border-radius:15px;padding:14px 21px;font-size:15px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .primary{background:var(--gold);color:#0b1422}.secondary{color:#f2f5fa;background:#1c2c3f;border:1px solid #42526b}.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .mock{border-radius:32px;border:1px solid #3d4b5d;background:linear-gradient(160deg,#1c2d40,#091725);padding:30px;box-shadow:0 20px 60px #0005;position:relative}
+    .mock:before{content:'';position:absolute;inset:0;border:1px solid #f3d38b24;border-radius:32px;pointer-events:none}
+    .mocktop{display:flex;align-items:center;gap:15px;margin-bottom:27px}.mocktop img{width:78px;height:78px;border-radius:20px}.mocktop strong{display:block;font-size:25px}.mocktop span{color:#b2beca;font-size:13px}
+    .mockrow{border-radius:14px;padding:14px 15px;background:#213146;margin:10px 0;display:flex;justify-content:space-between;gap:10px;font-size:14px}.check{color:var(--gold);font-weight:800}
+    h2{font-size:27px;margin:0 0 13px}.sub{color:var(--soft);margin:0 0 20px}.steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .step{background:var(--card);border:1px solid #304054;border-radius:20px;padding:25px;scroll-margin-top:18px}.step.selected{border-color:var(--gold);box-shadow:0 0 0 1px #d6a84f40}
+    .pill{display:inline-block;font-size:12px;font-weight:800;border-radius:30px;background:#d6a84f22;color:#f3cc77;padding:5px 11px;margin-bottom:14px}.step h3{font-size:21px;margin:0 0 13px}
+    ol{padding-left:23px;margin:0;color:#dde3eb}li{padding:5px 0}li::marker{color:var(--gold);font-weight:800}
+    .note{margin-top:24px;padding:17px 19px;border-radius:14px;background:#12283b;border:1px solid #3e546a;color:#d8e4ee}
+    footer{margin-top:32px;color:#9aa9b9;font-size:13px;text-align:center}a:not(.btn,.logo){color:#e8bd66}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;margin:38px 0}.mock{max-width:480px}.steps{grid-template-columns:1fr}h1{letter-spacing:-.6px}.wrap{padding:20px 18px 42px}}
+    @media(prefers-reduced-motion:no-preference){.btn{transition:transform .18s ease,filter .18s ease}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <a class="logo" href="./"><img src="icons/Icon-192.png" alt="ServicePro logotipi">ServicePro</a>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Bir ilova • Barcha qurilmalarda</div>
+      <h1>ServicePro endi <em>iPhone va Mac’da</em> ham.</h1>
+      <p class="intro">Arizalar, vazifalar, hisobotlar va chat — hammasi bitta joyda. Saytdan oching, bosh ekranga joylang va odatiy ilovadek foydalaning.</p>
+      <div class="actions">
+        <a class="btn primary" href="./">ServicePro’ni ochish ↗</a>
+        <button class="btn secondary" id="installButton" type="button" hidden>Ilovani o‘rnatish ↓</button>
+      </div>
+      <p id="installHint" class="sub" style="font-size:13px;margin-top:14px">Apple Developer akkaunti talab qilinmaydi.</p>
+    </div>
+    <div class="mock" aria-label="ServicePro imkoniyatlari">
+      <div class="mocktop"><img src="icons/Icon-192.png" alt=""><div><strong>ServicePro</strong><span>Boshqaruv va xizmatlar</span></div></div>
+      <div class="mockrow"><span>Arizalarni boshqarish</span><span class="check">✓</span></div>
+      <div class="mockrow"><span>Vazifalar va hisobotlar</span><span class="check">✓</span></div>
+      <div class="mockrow"><span>Jamoa bilan aloqa</span><span class="check">✓</span></div>
+      <div class="mockrow"><span>Tashkilotlar uchun panel</span><span class="check">✓</span></div>
+    </div>
+  </section>
+  <section aria-labelledby="how">
+    <h2 id="how">Qanday o‘rnatiladi?</h2>
+    <p class="sub">Quyidagi qadamlar qurilmangizga mos. O‘rnatilgan veb-ilova alohida oynada ochiladi.</p>
+    <div class="steps">
+      <article class="step" id="ios"><span class="pill">iPhone / iPad</span><h3>Safari orqali</h3>
+        <ol><li>Ushbu sahifani <strong>Safari</strong> brauzerida oching.</li><li>Quyidagi <strong>ServicePro’ni ochish</strong> tugmasini bosing.</li><li>Safari menyusida <strong>Ulashish (Share)</strong> tugmasini bosing.</li><li><strong>Bosh ekranga qo‘shish (Add to Home Screen)</strong>ni tanlang.</li><li><strong>Web App sifatida ochish</strong> yoqilganini tekshiring va <strong>Add</strong> bosing.</li></ol>
+      </article>
+      <article class="step" id="mac"><span class="pill">macOS 14+ (Sonoma va keyingi)</span><h3>Mac uchun</h3>
+        <ol><li>Ushbu saytni <strong>Safari</strong>da oching.</li><li><strong>ServicePro’ni ochish</strong> tugmasini bosing.</li><li>Safari’dagi <strong>File → Add to Dock</strong>ni tanlang.</li><li>Nomini <strong>ServicePro</strong> qilib tasdiqlang.</li><li>Endi ilovani Dock yoki Applications’dan ochasiz.</li></ol>
+      </article>
+      <article class="step" id="android"><span class="pill">Android</span><h3>Chrome orqali</h3>
+        <ol><li>Saytni Chrome’da oching.</li><li>Yuqorida <strong>Ilovani o‘rnatish</strong> tugmasi chiqsa, bosing.</li><li>Aks holda Chrome menyusidan <strong>Install app</strong> yoki <strong>Add to Home screen</strong>ni tanlang.</li></ol>
+      </article>
+      <article class="step" id="windows"><span class="pill">Windows / boshqa kompyuter</span><h3>Edge yoki Chrome</h3>
+        <ol><li>Saytni Edge yoki Chrome’da oching.</li><li>Brauzer menyusidan <strong>Apps → Install this site as an app</strong>ni tanlang.</li><li>Yoki <a href="https://apps.microsoft.com/detail/9N0J73GMLK1R" rel="noopener" target="_blank">Windows uchun Microsoft Store ilovasini</a> o‘rnating.</li></ol>
+      </article>
+    </div>
+    <p class="note"><strong>Eslatma:</strong> Bu App Store’dagi .ipa emas, o‘rnatiladigan veb-ilova (PWA). Ishlashi uchun internet va saytning HTTPS manzili kerak. Brauzerda kamera/video va push-bildirishnomalar imkoniyatlari platformaga qarab farq qilishi mumkin.</p>
+  </section>
+  <footer>© 2026 ServicePro — xizmatlarni birgalikda boshqarish.</footer>
+</main>
+<script>
+  (function () {
+    const agent = navigator.userAgent;
+    const isiOS = /iPhone|iPad|iPod/.test(agent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isMac = /Macintosh|Mac OS X/.test(agent) && !isiOS;
+    const platform = isiOS ? 'ios' : isMac ? 'mac' : /Android/.test(agent) ? 'android' : 'windows';
+    document.getElementById(platform).classList.add('selected');
+    const hint = document.getElementById('installHint');
+    if (isiOS) hint.textContent = 'Safari → Ulashish → Bosh ekranga qo‘shish. Apple Developer akkaunti kerak emas.';
+    else if (isMac) hint.textContent = 'Mac’dagi Safari: File → Add to Dock (macOS 14 yoki yangi).';
+    let pendingInstall = null;
+    window.addEventListener('beforeinstallprompt', function (event) {
+      event.preventDefault(); pendingInstall = event;
+      document.getElementById('installButton').hidden = false;
+    });
+    document.getElementById('installButton').addEventListener('click', async function () {
+      if (!pendingInstall) return;
+      pendingInstall.prompt();
+      await pendingInstall.userChoice;
+      pendingInstall = null;
+      this.hidden = true;
+    });
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+      hint.textContent = 'ServicePro allaqachon ilova sifatida ochilgan.';
+    }
+  })();
+</script>
+</body>
+</html>

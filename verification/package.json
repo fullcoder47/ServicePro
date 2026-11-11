@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "typescript": "^5.9.3"
+  }
+}

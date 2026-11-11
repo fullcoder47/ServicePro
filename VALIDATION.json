@@ -1,0 +1,19 @@
+{
+  "syntax": {
+    "test/chat/chat_room_test.dart": "PASS",
+    "lib/features/chat/chat_page.dart": "PASS",
+    "lib/features/chat/chat_strings.dart": "PASS"
+  },
+  "flutter_analyze": "NOT_RUN",
+  "flutter_widget_tests": "NOT_RUN",
+  "apk_build": "NOT_RUN",
+  "device_visual_qa": "NOT_RUN",
+  "source_version": 2,
+  "files": {
+    "README_UZ.md": "825699c8b1c5b7385685938b9ff785e3f5cf59ad8c93fdd166c56984aeee0384",
+    "test/chat/chat_room_test.dart": "c94c0b8d00531559d0b60f13d0811b385b766b7e47c8a6e26ac95fa1d899cf28",
+    "lib/features/chat/chat_page.dart": "2051f84bb0252178e8c1079195d2867efadf25b8d4852ab126d2579aef20c6ef",
+    "lib/features/chat/chat_strings.dart": "513e8b3174b0ce590a73fc8aab077dff8743f719139b9a64dbcffca91a98f5cc"
+  },
+  "original_chat_sha256": "8937236ebea30a6e4daab30defafc8089cef599990137b54cf3fb0be05e11e49"
+}

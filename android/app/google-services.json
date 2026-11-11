@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "455846934529",
+    "firebase_url": "https://zayaflkalar-default-rtdb.firebaseio.com",
+    "project_id": "zayaflkalar",
+    "storage_bucket": "zayaflkalar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455846934529:android:e27d96a4bc872f8615e800",
+        "android_client_info": {
+          "package_name": "com.example.servicepro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlYTcVw__QgXKq17zU-lEWeZy2yjnXyKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455846934529:android:2a7cf70c6f6944ba15e800",
+        "android_client_info": {
+          "package_name": "com.fullcoder.servicepro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlYTcVw__QgXKq17zU-lEWeZy2yjnXyKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

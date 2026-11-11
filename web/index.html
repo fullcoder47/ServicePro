@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <!-- Flutter replaces the base-href placeholder during web build. -->
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <!-- Flutter releases before 3.50 should let Safari handle the safe area. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111F">
+  <meta name="description" content="ServicePro — arizalar, vazifalar, hisobotlar va tashkilot boshqaruvi uchun ilova.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ServicePro">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/Apple-Touch-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/Icon-192.png">
+  <link rel="manifest" href="manifest.json">
+  <title>ServicePro</title>
+  <style>
+    html,body{margin:0;min-height:100%;background:#07111f;color:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+    .startup{position:fixed;inset:0;display:grid;place-content:center;gap:12px;text-align:center;background:#07111f}
+    .startup img{width:92px;height:92px;margin:0 auto;border-radius:24px}
+    .startup strong{font-size:22px;letter-spacing:.2px}
+    .startup span{color:#d6a84f;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="startup" id="startup" aria-label="ServicePro yuklanmoqda">
+    <img src="icons/Icon-192.png" alt="ServicePro">
+    <strong>ServicePro</strong>
+    <span>Ilova ishga tushmoqda...</span>
+  </div>
+  <script>
+    // Remove the placeholder once Flutter paints its first frame.
+    window.addEventListener('flutter-first-frame', function () {
+      document.getElementById('startup')?.remove();
+    }, {once: true});
+    setTimeout(function () { document.getElementById('startup')?.remove(); }, 12000);
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('servicepro-sw.js').catch(function () {});
+      });
+    }
+  </script>
+  <!-- Loaded on every build; also imported by the background FCM worker. -->
+  <script src="firebase-web-config.js"></script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
